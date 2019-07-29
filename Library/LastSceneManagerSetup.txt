@@ -1,0 +1,5 @@
+sceneSetups:
+- path: C:/Users/dmcdo/Age of War/Assets/Scenes/Lab Scene.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
