@@ -4,23 +4,18 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
-    Rigidbody2D rb;
-    public float hSpeed;
-    public float vSpeed;
+    public float moveSpeed;
+    private Rigidbody2D myRigidbody;
 
-    void Awake()
-    {
-        rb=GetComponent<Rigidbody2D>();
-    }
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity=new Vector2(hSpeed,vSpeed);
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        myRigidbody.velocity = new Vector2(-(1/Conductor.instance.secPerBeat), myRigidbody.velocity.y);
     }
 }
