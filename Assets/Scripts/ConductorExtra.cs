@@ -11,6 +11,16 @@ using static ConductorExtra;
 
 public class ConductorExtra : MonoBehaviour
 {
+    bool called = false;
+
+    //keep all the position-in-beats of notes in the song
+    public float[] notes;
+
+    //the index of the next note to be spawned
+    [HideInInspector] public int nextIndex = 0;
+
+    public GameObject musicNote;
+
     // Number of seconds to delay the start of audio playback.
     public double trackStartTime = 1f;
 
@@ -436,6 +446,21 @@ Song_Parser.Metadata FontData { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
+        // Change when a scheduled Audio Source will play
+        audioSource.SetScheduledStartTime(dspTime);
+
+        // Stop a scheduled Audio Source
+        AudioSource.Stop();
+
+        // Stop a Scheduled Audio Source at an exact time
+        audioSource.SetScheduledEndTime(dspTime);
+
+        // Pause all Audio Sources
+        AudioListener.pause = true;
+
+        // Use an Audio Source when the Listener is paused
+        AudioSource.ignoreListenerPause = true;    
+
         previousFrameTime = getTimer();
         lastReportedPlayheadPosition = 0;
 
@@ -450,6 +475,14 @@ Song_Parser.Metadata FontData { get; private set; }
     // Update is called once per frame
     void Update()
     {
+        if (nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats + beatsShownInAdvance)
+        {
+            //initialize the fields of the music note
+            Instantiate(musicNote);
+
+            nextIndex++;
+        }
+
         var secondsSinceStartedPlaying = (musicSource.timeSamples / (double)musicSource.clip.samples) *
                                       musicSource.clip.length;
         songTime += getTimer() - previousFrameTime;

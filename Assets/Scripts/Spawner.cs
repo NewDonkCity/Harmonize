@@ -4,34 +4,25 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    // Transforms to act as start and end markers for the journey.
     public GameObject notes;
-
-    private float timeBtwSpawn;
-    public float startTimeBtwSpawn;
-    public float decreaseTime;
-    public float minTime = 0.65f;
+    public Transform generationPoint;
+    public Transform endMarker;
+    public int beatCount;
+    public Vector3 currentPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timeBtwSpawn <= 0)
+        if (Conductor.instance.completedLoops == beatCount)
         {
-            Instantiate(notes, transform.position, Quaternion.identity);
-            timeBtwSpawn = startTimeBtwSpawn;
-            if (startTimeBtwSpawn > minTime)
-            {
-                startTimeBtwSpawn -= decreaseTime;
-            }
-        }
-        else
-        {
-            timeBtwSpawn -= Time.deltaTime;
+            Instantiate(notes, generationPoint.position, transform.rotation);
         }
     }
 }

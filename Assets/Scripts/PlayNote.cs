@@ -32,35 +32,35 @@ public class PlayNote : MonoBehaviour
             StartCoroutine(Pressed());
         if (Input.GetKeyDown(keyLeft) && actLeft)
         {
-            //Destroy(note);
+            Destroy(note);
             //gm.GetComponent<GameManager>().AddStreak();
             AddScore();
             //active = false;
         }
         if (Input.GetKeyDown(keyRight) && actRight)
         {
-            //Destroy(note);
+            Destroy(note);
             //gm.GetComponent<GameManager>().AddStreak();
             AddScore();
             //active = false;
         }
         if (Input.GetKeyDown(keyUp) && actUp)
         {
-            //Destroy(note);
+            Destroy(note);
             //gm.GetComponent<GameManager>().AddStreak();
             AddScore();
             //active = false;
         }
         if (Input.GetKeyDown(keyDown) && actDown)
         {
-            //Destroy(note);
+            Destroy(note);
             //gm.GetComponent<GameManager>().AddStreak();
             AddScore();
             //active = false;
         }
         if (Input.GetKeyDown(keyUp) && Input.GetKeyDown(keyDown) && actUpDown)
         {
-            //Destroy(note);
+            Destroy(note);
             //gm.GetComponent<GameManager>().AddStreak();
             AddScore();
             //active = false;

@@ -12,12 +12,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         PlayerPrefs.SetInt("Score", 0);
+
+        /*
         PlayerPrefs.SetInt("RockMeter", 25);
         PlayerPrefs.SetInt("Streak", 0);
         PlayerPrefs.SetInt("HighStreak", 0);
         PlayerPrefs.SetInt("Mult", 1);
         PlayerPrefs.SetInt("NotesHit", 0);
         PlayerPrefs.SetInt("Start", 1);
+        */
     }
 
     // Update is called once per frame

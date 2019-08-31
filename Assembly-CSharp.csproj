@@ -62,26 +62,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MusicLooping\LoopMGR.cs" />
+    <Compile Include="Assets\MusicLooping\LoopTrack.cs" />
+    <Compile Include="Assets\MusicLooping\MusicArea.cs" />
+    <Compile Include="Assets\MusicLooping\MusicTrigger.cs" />
+    <Compile Include="Assets\MusicLooping\MusicTriggerSide.cs" />
+    <Compile Include="Assets\Scripts\AudioController.cs" />
     <Compile Include="Assets\Scripts\AudioSync.cs" />
+    <Compile Include="Assets\Scripts\BarScript.cs" />
     <Compile Include="Assets\Scripts\BeatSynchronizer.cs" />
     <Compile Include="Assets\Scripts\BF.cs" />
     <Compile Include="Assets\Scripts\Conductor.cs" />
     <Compile Include="Assets\Scripts\ConductorExtra.cs" />
     <Compile Include="Assets\Scripts\Dash.cs" />
+    <Compile Include="Assets\Scripts\Eight.cs" />
+    <Compile Include="Assets\Scripts\Five.cs" />
+    <Compile Include="Assets\Scripts\Four.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
+    <Compile Include="Assets\Scripts\MusicPlayer.cs" />
     <Compile Include="Assets\Scripts\Note.cs" />
+    <Compile Include="Assets\Scripts\Note2.cs" />
     <Compile Include="Assets\Scripts\NoteDestroyer.cs" />
     <Compile Include="Assets\Scripts\NoteExtra.cs" />
     <Compile Include="Assets\Scripts\NoteGenerator.cs" />
+    <Compile Include="Assets\Scripts\One.cs" />
     <Compile Include="Assets\Scripts\Parallax.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayNote.cs" />
     <Compile Include="Assets\Scripts\PPText.cs" />
     <Compile Include="Assets\Scripts\RockMeter.cs" />
+    <Compile Include="Assets\Scripts\Seven.cs" />
+    <Compile Include="Assets\Scripts\Six.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Spotlight.cs" />
+    <Compile Include="Assets\Scripts\Stat.cs" />
     <Compile Include="Assets\Scripts\SyncedAnimation.cs" />
     <Compile Include="Assets\Scripts\SyncedRotation.cs" />
+    <Compile Include="Assets\Scripts\Three.cs" />
+    <Compile Include="Assets\Scripts\Two.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Ceemo/Documents/Harmonize/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
