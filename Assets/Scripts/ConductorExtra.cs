@@ -60,7 +60,21 @@ public class ConductorExtra : MonoBehaviour
 
     //int multiplier = 1;
     //int streak = 0;
-    
+
+    //int toggle;
+
+    //public double timeSigNum;
+    //public double timeSigDenom = 4;
+
+    //public GameObject[] noteArray
+
+    //public GameObject notes;
+    //public Transform generationPoint;
+
+    //public Note[] note;
+    //public Note[] newNote;
+
+    //public Transform notePoint;
 
 //This structure contains all the information for this track
 public struct Metadata
@@ -470,6 +484,12 @@ Song_Parser.Metadata FontData { get; private set; }
         double initTime = AudioSettings.dspTime;
         musicSource.PlayScheduled(initTime + trackStartTime);
         OnAudioStart?.Invoke(initTime + trackStartTime);
+
+        for (int i = 0; i < notes.Length; i++)
+        {
+            Instantiate(noteObjects[i], generationPoint.position, transform.rotation);
+            //currentPosition[i] = noteObjects[i].transform.position;
+        }
     }
 
     // Update is called once per frame
@@ -537,6 +557,69 @@ Song_Parser.Metadata FontData { get; private set; }
 
                 barExecutedTime += barTime;
             }
+        }
+
+        //StartCoroutine(playSound());
+
+            //completedBeats = 0;
+
+            //completedLoops = 0;
+
+            // Switches the toggle to use the other Audio Source next
+            //toggle = 1 - toggle;
+
+            //currentPosition = transform.position;
+            //notePosition = notes[beatCount] / beatsPerLoop;
+
+        //AudioSource clipToPlay = audioSourceArray[nextClip];
+
+        for (int i = 0; i < notes.Length; i++)
+            {
+                Instantiate(noteObjects[i], generationPoint.position, transform.rotation);
+            }
+        
+        if (AudioSettings.dspTime + 0.2 > nextBeatTime)
+        {
+            //Instantiate(notes, generationPoint.position, transform.rotation);
+            //transform.position = Vector3.Lerp(currentPosition, endMarker.position, loopPositionInAnalog);
+            nextBeatTime = nextBeatTime + (secPerBeat*20);
+        }
+        //noteObjects[i].transform.position = Vector3.Lerp(generationPoint.position, endMarker.position, loopAnalog[i]);
+
+        //if (nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats + beatsShownInAdvance)
+            if (notes[i] <= loopPositionInBeats)
+            {
+                //Note[] newNote = Instantiate(noteObjects[i], generationPoint.position, transform.rotation) as Note[];
+                Instantiate(noteObjects[i], generationPoint.position, transform.rotation);
+                noteObjects[i].transform.position = Vector3.Lerp(generationPoint.position, endMarker.position, loopAnalog[i]);
+                // Set our position as a fraction of the distance between the markers.
+                //+ (notes[i] / beatsPerLoop)
+                notes[i] = 1000;
+                //beatCount++;
+                //if (beatCount == beatsPerLoop)
+                //beatCount = 0;
+            }
+            //loopPositionInBeats + (i*0.1f)
+            //noteObjects[i].transform.position = Vector3.Lerp(generationPoint.position, endMarker.position, loopPositionInBeats + (i/beatsPerLoop));
+        
+        for (int i = 0; i < notes.Length; i++)
+            {
+                //Instantiate(noteObjects[notes[i]], generationPoint.position, transform.rotation);
+                //currentPosition[i] = noteObjects[i].transform.position;
+            }
+        for (int i = 0; i < notes.Length; i++)
+        {
+            // Set our position as a fraction of the distance between the markers.
+            //noteObjects[i].transform.position = Vector3.Lerp(currentPosition[i], endMarker.position, loopPositionInAnalog);
+        }
+
+        if (songPositionInBeats >= completedBeats)
+        {
+            Instantiate(musicNote, generationPoint.position, transform.rotation);
+            beatCount++;
+            if (beatCount == noteArray.Length)
+                beatCount = 0;
+            completedBeats++;
         }
     }
     double GetTrackTime()
@@ -650,20 +733,43 @@ Song_Parser.Metadata FontData { get; private set; }
     {
         return 100*multiplier;
     }
+
+    IEnumerator playSound()
+    {
+        /*
+        for (int i = 0; i < noteArray.Length-1; i++)
+        {
+            Instantiate(notes, generationPoint.position, transform.rotation);
+            yield return new WaitForSeconds(secPerBeat * 8);
+        }
+        */
+
+/*
+private IEnumerator SyncSources()
+{
+    while (true)
+    {
+        foreach (var slave in audioSourceArray)
+        {
+            slave.timeSamples = audioSourceArray[0].timeSamples;
+            yield return null;
+        }
+    }
+}
 }
 
 int getTimer()
 {
-    throw new NotImplementedException();
+throw new NotImplementedException();
 }
 
 void TapTheBeat()
 {
-    throw new NotImplementedException();
+throw new NotImplementedException();
 }
 
 void StartCoroutine(IEnumerator enumerator)
 {
-    throw new NotImplementedException();
+throw new NotImplementedException();
 }
 */

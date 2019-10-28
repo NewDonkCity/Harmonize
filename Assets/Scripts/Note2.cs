@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Note2 : MonoBehaviour
 {
-    private Rigidbody2D myRigidbody;
+    public Rigidbody myRigidbody;
     
     // Start is called before the first frame update
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
+        //myRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        myRigidbody.velocity = new Vector2(-(1 / Conductor.instance.secPerBeat), myRigidbody.velocity.y);
+        //myRigidbody.velocity = new Vector3(0, 0, (200 / Conductor.instance.secPerBeat));
     }
 }

@@ -1,47 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Seven : MonoBehaviour
 {
-    public double nextStartTime = 0;
-    public AudioSource[][] audioSourceArray;
-    public AudioClip[] audioClipArray;
-    public KeyCode key1, key2, key3;
-    int toggle;
-    public int nextClip;
+    [SerializeField] private Five _metronome;
+    [SerializeField] private AudioClip _audioClip;
+    [SerializeField, Range(0f, 2f)] private double _attackTime;
+    [SerializeField, Range(0f, 2f)] private double _sustainTime;
+    [SerializeField, Range(0f, 2f)] private double _releaseTime;
+    [SerializeField, Range(1, 8)] private int _numVoices = 2;
+    [SerializeField] private Six _samplerVoicePrefab;
 
-    void Start()
+    private Six[] _samplerVoices;
+    private int _nextVoiceIndex;
+
+    private void Awake()
     {
-        nextStartTime = AudioSettings.dspTime + 0.2;
+        _samplerVoices = new Six[_numVoices];
+
+        for (int i = 0; i < _numVoices; ++i)
+        {
+            Six samplerVoice = Instantiate(_samplerVoicePrefab);
+            samplerVoice.transform.parent = transform;
+            samplerVoice.transform.localPosition = Vector3.zero;
+            _samplerVoices[i] = samplerVoice;
+        }
     }
 
-    void Update()
+    private void OnEnable()
     {
-        if (Input.GetKey(key1))
-            nextClip = 0;
-        if (Input.GetKey(key2))
-            nextClip = 1;
-        if (Input.GetKey(key3))
-            nextClip = 2;
-        if (AudioSettings.dspTime > nextStartTime - 1)
+        if (_metronome != null)
         {
-
-            AudioClip clipToPlay = audioClipArray[nextClip];
-
-            for (int i = 0; i < audioSourceArray.Length; i++)
-            {
-                // Loads the next Clip to play and schedules when it will start
-                audioSourceArray[toggle][i].clip = clipToPlay;
-                audioSourceArray[toggle][i].PlayScheduled(nextStartTime);
-            }
-
-            // Checks how long the Clip will last and updates the Next Start Time with a new value
-            double duration = (double)clipToPlay.samples / clipToPlay.frequency;
-            nextStartTime = nextStartTime + duration;
-
-            // Switches the toggle to use the other Audio Source next
-            toggle = 1 - toggle;
+            _metronome.Ticked += HandleTicked;
         }
+    }
+
+    private void OnDisable()
+    {
+        if (_metronome != null)
+        {
+            _metronome.Ticked -= HandleTicked;
+        }
+    }
+
+    private void HandleTicked(double tickTime)
+    {
+        _samplerVoices[_nextVoiceIndex].Play(_audioClip, tickTime, _attackTime, _sustainTime, _releaseTime);
+
+        _nextVoiceIndex = (_nextVoiceIndex + 1) % _samplerVoices.Length;
     }
 }

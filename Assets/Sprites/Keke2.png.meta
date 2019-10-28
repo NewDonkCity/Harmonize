@@ -1,0 +1,485 @@
+fileFormatVersion: 2
+guid: e229fc2ae73ecd14aa92fb4897733964
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4307941700476782475
+    second: Keke2_0
+  - first:
+      213: 3877703127253205417
+    second: Keke2_1
+  - first:
+      213: 469678481169234217
+    second: Keke2_2
+  - first:
+      213: -7930763372293125498
+    second: Keke2_3
+  - first:
+      213: 1602778311515135204
+    second: Keke2_4
+  - first:
+      213: 2506185343895148193
+    second: Keke2_5
+  - first:
+      213: 4310977558089941860
+    second: Keke2_6
+  - first:
+      213: -4406041460926795357
+    second: Keke2_7
+  - first:
+      213: -5372669469408243997
+    second: Keke2_8
+  - first:
+      213: 3489127421357265524
+    second: Keke2_9
+  - first:
+      213: 4622253300193250741
+    second: Keke2_10
+  - first:
+      213: -6568542043344662468
+    second: Keke2_11
+  - first:
+      213: 3027171310545313497
+    second: Keke2_12
+  - first:
+      213: -1683355012040784846
+    second: Keke2_13
+  - first:
+      213: -8314218257295748865
+    second: Keke2_14
+  - first:
+      213: -5215583815840827
+    second: Keke2_15
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Keke2_0
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 306
+        width: 90
+        height: 102
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c48b2a29975edd843ab0dee256814a2b
+      internalID: -4307941700476782475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_1
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 306
+        width: 97
+        height: 102
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4e765c80f7095c4ca1182196abc9a4a
+      internalID: 3877703127253205417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_2
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 306
+        width: 108
+        height: 96
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc92fa776e429074f9a01f9cc43982da
+      internalID: 469678481169234217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_3
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 306
+        width: 109
+        height: 85
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30d4b8b4aec9fba43b0843d3a242c6dd
+      internalID: -7930763372293125498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_4
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 306
+        width: 110
+        height: 74
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2be46b4efd03dcc4ca3907f68d04c64f
+      internalID: 1602778311515135204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 204
+        width: 111
+        height: 75
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a11ae4384a4e9b24da6cee3df23b1d1b
+      internalID: 2506185343895148193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_6
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 204
+        width: 93
+        height: 90
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 190db160ec104ed448415b99189ef56c
+      internalID: 4310977558089941860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_7
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 204
+        width: 86
+        height: 97
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2b39a37ac44d804180eceddc3d8c438
+      internalID: -4406041460926795357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_8
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 204
+        width: 90
+        height: 100
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ee6f3c3426bdb94f882d20da585583c
+      internalID: -5372669469408243997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_9
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 204
+        width: 97
+        height: 99
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ad686051ad0fd1449b31ef3760e9b9e
+      internalID: 3489127421357265524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_10
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 102
+        width: 108
+        height: 97
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e985a02cc14dd634b90d8a61a2535c46
+      internalID: 4622253300193250741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_11
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 102
+        width: 109
+        height: 90
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fdee29debde3874ea0b253a202285fd
+      internalID: -6568542043344662468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_12
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 102
+        width: 110
+        height: 76
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 226feca0f965df74e8ce3f9f1cef6924
+      internalID: 3027171310545313497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_13
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 102
+        width: 111
+        height: 76
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 551a042894dafb546b4b53b7eda0530d
+      internalID: -1683355012040784846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_14
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 102
+        width: 93
+        height: 90
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c0136f289b14164a8f93a43efcacd19
+      internalID: -8314218257295748865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Keke2_15
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 0
+        width: 86
+        height: 98
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f792aea5a9bff64b8d7f20f5a64da32
+      internalID: -5215583815840827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: efb0e58c849ea22458f0fe9938753216
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

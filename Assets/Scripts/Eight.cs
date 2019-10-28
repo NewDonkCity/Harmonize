@@ -1,100 +1,70 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
+using System.Collections;
 
-public enum AudioState { Off, Going1, Going2 };
 public class Eight : MonoBehaviour
 {
-    public AudioState state = AudioState.Off;
-
-    public AudioSource thruster_Start;
-    public AudioSource thruster_Going_1;
-    public AudioSource thruster_Going_2;
-
-    public double startDuration = 0;
-    public double goingDuration = 0;
-    public double nextStartTime = 0;
-
-    public bool thrusterOn = false;
-    public bool shuttingDown = false;
-
-    public float thrusterVolume = 1.0f;
-
-    void Start()
+    private enum State
     {
-        startDuration = (double)thruster_Start.clip.samples / thruster_Start.clip.frequency;
-        goingDuration = (double)thruster_Going_1.clip.samples / thruster_Going_1.clip.frequency;
+        Idle,
+        Attack,
+        Sustain,
+        Release
     }
 
-    // Update is called once per frame
-    void Update()
+    private State _state;
+    private double _attackIncrement;
+    private uint _sustainSamples;
+    private double _releaseIncrement;
+    private double _outputLevel;
+
+    public void Reset(double attackTime_s, double sustainTime_s, double releaseTime_s, int sampleRate)
     {
-        thrusterOn = Input.GetKey("Space");
-
-        bool prepareNextAudio = (AudioSettings.dspTime > nextStartTime - 0.5);
-
-        switch (state)
-        {
-            case AudioState.Off:
-                if (thrusterOn)
-                {
-                    thrusterVolume = 1.0f;
-                    SetAudioSourceVolume(thrusterVolume);
-
-                    double startTime = AudioSettings.dspTime + 0.05;
-
-                    thruster_Start.PlayScheduled(startTime);
-                    nextStartTime = startTime + startDuration;
-                    state = AudioState.Going1;
-                }
-                break;
-            case AudioState.Going1:
-                if (prepareNextAudio)
-                {
-                    thruster_Going_2.PlayScheduled(nextStartTime);
-                    nextStartTime += goingDuration;
-                    state = AudioState.Going2;
-                }
-                break;
-            case AudioState.Going2:
-                if (prepareNextAudio)
-                {
-                    thruster_Going_1.PlayScheduled(nextStartTime);
-                    nextStartTime += goingDuration;
-                    state = AudioState.Going1;
-                }
-                break;
-        }
-
-        if (state != AudioState.Off && !thrusterOn)
-        {
-            shuttingDown = true;
-        }
-
-        if (shuttingDown)
-        {
-            thrusterVolume -= 0.1f;
-
-            if (thrusterVolume < 0)
-            {
-                thruster_Start.Stop();
-                thruster_Going_1.Stop();
-                thruster_Going_2.Stop();
-
-                state = AudioState.Off;
-                shuttingDown = false;
-            }
-            else
-            {
-                SetAudioSourceVolume(thrusterVolume);
-            }
-        }
+        _state = State.Attack;
+        _attackIncrement = (attackTime_s > 0.0) ? (1.0 / (attackTime_s * sampleRate)) : 1.0;
+        _sustainSamples = (uint)(sustainTime_s * sampleRate);
+        _releaseIncrement = (releaseTime_s > 0.0) ? (1.0 / (releaseTime_s * sampleRate)) : 1.0;
+        _outputLevel = 0.0;
     }
 
-    void SetAudioSourceVolume(float volume)
+    public double GetLevel()
     {
-        thruster_Start.volume = volume;
-        thruster_Going_1.volume = volume;
-        thruster_Going_2.volume = volume;
+        switch (_state)
+        {
+            case State.Idle:
+                _outputLevel = 0.0;
+                break;
+            case State.Attack:
+                _outputLevel += _attackIncrement;
+
+                if (_outputLevel > 1.0)
+                {
+                    _outputLevel = 1.0;
+                    _state = State.Sustain;
+                }
+
+                break;
+            case State.Sustain:
+                if ((_sustainSamples == 0) || (--_sustainSamples == 0))
+                {
+                    _state = State.Release;
+                }
+
+                break;
+            case State.Release:
+                _outputLevel -= _releaseIncrement;
+
+                if (_outputLevel < 0.0)
+                {
+                    _outputLevel = 0.0;
+                    _state = State.Idle;
+                }
+
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return _outputLevel;
     }
 }

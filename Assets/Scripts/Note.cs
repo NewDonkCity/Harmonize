@@ -6,21 +6,54 @@ public class Note : MonoBehaviour
 {
     // Transforms to act as start and end markers for the journey.
     public Transform endMarker;
-    public int beatCount;
     public Vector3 currentPosition;
+    public float[] notePosition;
 
-    public GameObject notes;
-    public Transform generationPoint;
+    //public GameObject notes;
+    //public Transform generationPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         currentPosition = transform.position;
+        /*
+        for (int i = 0; i < Conductor.instance.notes.Length; i++)
+        {
+            //if (nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats + beatsShownInAdvance)
+            if (Conductor.instance.notes[i] <= Conductor.instance.loopPositionInBeats)
+            {
+                notePosition[i] = Conductor.instance.notes[i] / Conductor.instance.beatsPerLoop;
+            }
+        }
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.position = Vector3.Lerp(currentPosition, endMarker.position, Conductor.instance.loopPositionInAnalog);
+        /*
+        float step = Conductor.instance.noteSpeed * (float)AudioSettings.dspTime; // calculate distance to move
+        transform.position = Vector3.MoveTowards(currentPosition, endMarker.position, step);
+        for (int i = 0; i < Conductor.instance.notes.Length; i++)
+        {
+            // Set our position as a fraction of the distance between the markers.
+            //transform.position = Vector3.Lerp(currentPosition, endMarker.position, Conductor.instance.loopAnalog[Conductor.instance.notes[i]]);
+            // Move our position a step closer to the target.
+            //float step = Conductor.instance.noteSpeed * (float)AudioSettings.dspTime; // calculate distance to move
+            //transform.position = Vector3.MoveTowards(currentPosition, endMarker.position, step);
+            /*
+            //if (nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats + beatsShownInAdvance)
+            if (Conductor.instance.notes[i] <= Conductor.instance.loopPositionInBeats)
+            {
+                // Set our position as a fraction of the distance between the markers.
+                transform.position = Vector3.Lerp(currentPosition, endMarker.position, Conductor.instance.loopPositionInAnalog + notePosition[i]);
+            }
+        }
+        //if (transform.position == endMarker.position)
+        //if (Time.deltaTime >= 4)
+        //Destroy(gameObject);
+        /*
         if (Conductor.instance.completedLoops == beatCount - 1)
         {
             Instantiate(notes, generationPoint.position, transform.rotation);
@@ -35,5 +68,6 @@ public class Note : MonoBehaviour
         {
             Destroy(notes);
         }
+        */
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    int multiplier = 1;
+    int multiplier = 2;
     int streak = 0;
 
     // Start is called before the first frame update
@@ -31,8 +31,10 @@ public class GameManager : MonoBehaviour
 
     public void AddStreak()
     {
+        /*
         if (PlayerPrefs.GetInt("RockMeter") + 1 < 50)
             PlayerPrefs.SetInt("RockMeter", PlayerPrefs.GetInt("RockMeter") + 1);
+        */
         streak++;
         if (streak >= 24)
             multiplier = 4;
@@ -53,9 +55,11 @@ public class GameManager : MonoBehaviour
 
     public void ResetStreak()
     {
+        /*
         PlayerPrefs.SetInt("RockmMeter", PlayerPrefs.GetInt("RockMeter") - 2);
         if (PlayerPrefs.GetInt("RockMeter") < 0)
             Lose();
+        */
         streak = 0;
         multiplier = 1;
         UpdateGUI();

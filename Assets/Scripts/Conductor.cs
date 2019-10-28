@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public enum AudioState { Off, Going1, Going2 };
-[RequireComponent(typeof(AudioSource))]
 public class Conductor : MonoBehaviour
 {
     //Song beats per minute
@@ -15,16 +13,13 @@ public class Conductor : MonoBehaviour
     [HideInInspector] public float secPerBeat;
 
     //Current song position, in seconds
-    [HideInInspector] public float songPosition;
+    public float songPosition;
 
     //Current song position, in beats
-    [HideInInspector] public float songPositionInBeats;
+    public float songPositionInBeats;
 
     //How many seconds have passed since the song started
-    [HideInInspector] public float dspSongTime;
-
-    //an AudioSource attached to this GameObject that will play the music.
-    //public AudioSource musicSource;
+    public float dspSongTime;
 
     //The offset to the first beat of the song in seconds
     public float firstBeatOffset;
@@ -36,42 +31,60 @@ public class Conductor : MonoBehaviour
     public int completedLoops = 0;
 
     //The current position of the song within the loop in beats.
-    [HideInInspector] public float loopPositionInBeats;
+    public float loopPositionInBeats;
 
     //The current relative position of the song within the loop measured between 0 and 1.
-    [HideInInspector] public float loopPositionInAnalog;
+    public float loopPositionInAnalog;
+
+    public float beatPosition;
 
     //Conductor instance
     public static Conductor instance;
 
     //how many beats are shown in advance
-    //public float beatsShownInAdvance;
+    public int beatsShownInAdvance;
 
     //Use two Audio Sources in an Array
     public AudioSource[] audioSourceArray;
 
-    //int toggle;
+    [HideInInspector] int nextClip;
+    [HideInInspector] int currentClip;
 
-    int nextClip;
-    int currentClip = 0;
+    public double nextStartTime = 0;
+    public double nextBeatTime = 0;
 
-    [HideInInspector] public double nextStartTime = 0;
-
-    public double timeSigNum;
-    public double timeSigDenom = 4;
     double duration;
 
-    public KeyCode clipKey1, clipKey2, clipKey3, key1, key2, key3, keyUp, keyDown;
+    public KeyCode key1, key2, key3, keyUp, keyDown;
 
     public int layer = 0;
 
     // Transforms to act as start and end markers for the journey.
     public Transform endMarker;
-    public int beatCount;
+    public Vector3 startPosition;
     public Vector3 currentPosition;
 
-    public GameObject notes;
     public Transform generationPoint;
+
+    //keep all the position-in-beats of notes in the song
+    public GameObject[] notes;
+
+    float[] songBeats;
+    int[] compLoops;
+    public float[] loopAnalog;
+
+    double nextTime;
+
+    public GameObject[] notePrefabs; //size gets set in inspector! drag prefabs in there!
+
+    double sampleRate = 0.0F;
+    bool ticked = false;
+
+    public Transform cam;
+
+    public int i;
+
+    public float speed;
 
     void Awake()
     {
@@ -88,25 +101,37 @@ public class Conductor : MonoBehaviour
         dspSongTime = (float)AudioSettings.dspTime;
 
         nextStartTime = AudioSettings.dspTime + 0.2;
+        nextBeatTime = 0;
 
         audioSourceArray[nextClip].PlayScheduled(nextStartTime);
         audioSourceArray[nextClip + 1].PlayScheduled(nextStartTime);
         audioSourceArray[nextClip + 2].PlayScheduled(nextStartTime);
+
+        songBeats = new float[notePrefabs.Length];
+        compLoops = new int[notePrefabs.Length];
+        loopAnalog = new float[notePrefabs.Length];
+
+        nextTime = AudioSettings.dspTime + secPerBeat;
+
+        double startTick = AudioSettings.dspTime;
+        sampleRate = AudioSettings.outputSampleRate;
+
+        nextTime = startTick + secPerBeat;
+
+        notes = new GameObject[notePrefabs.Length]; //makes sure they match length
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(clipKey1))
+        if (Input.GetKey(key1))
             nextClip = 0;
-        if (Input.GetKey(clipKey2))
+        if (Input.GetKey(key2))
             nextClip = 3;
-        if (Input.GetKey(clipKey3))
+        if (Input.GetKey(key3))
             nextClip = 6;
         if (AudioSettings.dspTime + 0.2 > nextStartTime)
         {
-
-            //AudioSource clipToPlay = audioSourceArray[nextClip];
 
             if (nextClip == currentClip)
             {
@@ -130,44 +155,28 @@ public class Conductor : MonoBehaviour
             nextStartTime = nextStartTime + duration;
 
             currentClip = nextClip;
-
-            // Switches the toggle to use the other Audio Source next
-            //toggle = 1 - toggle;
         }
 
         if (Input.GetKeyDown(keyDown) && layer > 0)
         {
-            //source[k].volume = source[k].volume - 0.01f;
             layer = layer - 1;
         }
         if (Input.GetKeyDown(keyUp) && layer < 3)
         {
-            //source[k].volume = source[k].volume + 0.01f;
             layer = layer + 1;
         }
         if (layer > 2)
-            audioSourceArray[nextClip + 2].volume = 1;
+            audioSourceArray[currentClip + 2].volume = 1;
         else
-            audioSourceArray[nextClip + 2].volume = 0;
+            audioSourceArray[currentClip + 2].volume = 0;
         if (layer > 1)
-            audioSourceArray[nextClip + 1].volume = 1;
+            audioSourceArray[currentClip + 1].volume = 1;
         else
-            audioSourceArray[nextClip + 1].volume = 0;
+            audioSourceArray[currentClip + 1].volume = 0;
         if (layer > 0)
-            audioSourceArray[nextClip].volume = 1;
+            audioSourceArray[currentClip].volume = 1;
         else
-            audioSourceArray[nextClip].volume = 0;
-        if (Conductor.instance.completedLoops == beatCount - 1)
-            Instantiate(notes, generationPoint.position, transform.rotation);
-        if (Conductor.instance.completedLoops == beatCount)
-        {
-            // Set our position as a fraction of the distance between the markers.
-            transform.position = Vector3.Lerp(transform.position, endMarker.position, Conductor.instance.loopPositionInAnalog);
-        }
-        if (Conductor.instance.completedLoops > beatCount)
-        {
-            Destroy(notes);
-        }
+            audioSourceArray[currentClip].volume = 0;
 
         /*
         // To calculate the semiquaver note length of a 110 bpm track in 4/4: 
@@ -191,30 +200,100 @@ public class Conductor : MonoBehaviour
 
         // Schedule an ending clip to start on the next bar
         //endCueAudioSource.PlayScheduled(nextBarTime);
+        */
 
         //determine how many seconds since the song started
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
 
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;
-        */
+
+        for (int i = 0; i < notes.Length; i++)
+        {
+            //determine how many beats since the song started
+            songBeats[i] = (songPosition / secPerBeat) + i;
+
+            //calculate the loop position
+            if (songBeats[i] >= (compLoops[i] + 1) * beatsPerLoop)
+                compLoops[i]++;
+            loopAnalog[i] = (songBeats[i] - compLoops[i] * beatsPerLoop) / beatsPerLoop;
+        }
 
         //calculate the loop position
         if (songPositionInBeats >= (completedLoops + 1) * beatsPerLoop)
             completedLoops++;
         loopPositionInBeats = songPositionInBeats - completedLoops * beatsPerLoop;
         loopPositionInAnalog = loopPositionInBeats / beatsPerLoop;
-    }
+        beatPosition = Mathf.Repeat(loopPositionInBeats/2, 1);
 
-    private IEnumerator SyncSources()
-    {
-        while (true)
+        secPerBeat = 60f / songBpm;
+        double dspTime = AudioSettings.dspTime;
+
+        while (dspTime >= nextTime)
         {
-            foreach (var slave in audioSourceArray)
-            {
-                slave.timeSamples = audioSourceArray[0].timeSamples;
-                yield return null;
-            }
+            ticked = false;
+            nextTime += secPerBeat;
+        }
+
+        if (i > 3 && i <= notePrefabs.Length)
+        {
+            //if (currentPosition != notes[i - 4].transform.localPosition)
+            currentPosition = notes[i - 4].transform.localPosition;
+            notes[i - 4].transform.localPosition = Vector3.MoveTowards(currentPosition, endMarker.localPosition, speed * Time.deltaTime);
+            //notes[i - 4].transform.localPosition = Vector3.Lerp(currentPosition, endMarker.localPosition, beatPosition);
         }
     }
+
+    void LateUpdate()
+    {
+        if (!ticked && nextTime >= AudioSettings.dspTime)
+        {
+            ticked = true;
+            BroadcastMessage("OnTick");
+        }
+    }
+
+    // Just an example OnTick here
+    void OnTick()
+    {
+        Debug.Log("Tick");
+
+
+
+        if (i <= notePrefabs.Length - 4)
+        {
+            generationPoint.localPosition = new Vector3(UnityEngine.Random.Range(-10f, 0f), UnityEngine.Random.Range(0f, 10f), 20f);
+            notes[i] = Instantiate(notePrefabs[i], generationPoint.position, transform.rotation) as GameObject;
+            notes[i].transform.parent = cam;
+            startPosition = notes[i].transform.localPosition;
+            speed = (endMarker.localPosition - startPosition).magnitude / (secPerBeat*1.7f);
+        }
+        if (i > 3)
+            Destroy(notes[i - 4]);
+
+        nextTime += secPerBeat;
+        i++;
+        if (i > notePrefabs.Length + 1)
+            i = 0;
+    }
+
+    /*
+    void FixedUpdate()
+    {
+        secPerBeat = 60f / songBpm;
+        double dspTime = AudioSettings.dspTime;
+
+        while (dspTime >= nextTime)
+        {
+            ticked = false;
+            nextTime += secPerBeat;
+        }
+
+        if (i >= 1 && i <= notePrefabs.Length - 1)
+        {
+            currentPosition = notes[i - 1].transform.position;
+            notes[i - 1].transform.position = Vector3.Lerp(currentPosition, endMarker.position, loopPositionInAnalog);
+        }
+    }
+    */
 }

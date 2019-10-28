@@ -5,7 +5,7 @@ using UnityEngine;
 public class NoteGenerator : MonoBehaviour
 {
     public GameObject notes;
-    public Transform generationPoint;
+    public GameObject generationPoint;
     public float distanceBetween;
     private float notesWidth;
     public float compLoops = 0;
@@ -13,17 +13,26 @@ public class NoteGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(Spawn());
         //notesWidth = notes.GetComponent<CircleCollider2D>().radius * 2;
-        notesWidth = 1;
+        //notesWidth = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Conductor.instance.completedLoops > compLoops)
         {
-            Instantiate(notes, generationPoint.position, transform.rotation);
+            Instantiate(notes, generationPoint.transform.position, transform.rotation);
             compLoops = Conductor.instance.completedLoops;
         }
+        */
+    }
+
+    IEnumerator Spawn()
+    {
+        Instantiate(notes, generationPoint.transform.position, transform.rotation);
+        yield return new WaitForSeconds(5);
     }
 }

@@ -1,20 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
 public class Three : MonoBehaviour
 {
-    public AudioSource audioSourceIntro;
-    public AudioSource audioSourceLoop;
-    private bool startedLoop;
+    public int Base;
+    public int Step;
+    public float BPM;
+    public int CurrentStep = 1;
+    public int CurrentMeasure;
 
-    void FixedUpdate()
+    private float interval;
+    private float nextTime;
+
+    public void StartMetronome()
     {
-        if (!audioSourceIntro.isPlaying && !startedLoop)
+        StopCoroutine("DoTick");
+        CurrentStep = 1;
+        var multiplier = Base / 4f;
+        var tmpInterval = 60f / BPM;
+        interval = tmpInterval / multiplier;
+        nextTime = Time.time; // set the relative time to now
+        StartCoroutine("DoTick");
+    }
+
+    IEnumerator DoTick() // yield methods return IEnumerator
+    {
+        for (; ; )
         {
-            audioSourceLoop.Play();
-            Debug.Log("Done playing");
-            startedLoop = true;
+            Debug.Log("bop");
+            // do something with this beat
+            nextTime += interval; // add interval to our relative time
+            yield return new WaitForSeconds(nextTime - Time.time); // wait for the difference delta between now and expected next time of hit
+            CurrentStep++;
+            if (CurrentStep > Step)
+            {
+                CurrentStep = 1;
+                CurrentMeasure++;
+            }
         }
     }
 }

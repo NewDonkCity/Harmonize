@@ -8,7 +8,7 @@ public class PlayNote : MonoBehaviour
     SpriteRenderer sr;
     public KeyCode keyLeft, keyRight, keyUp, keyDown;
     bool actLeft, actRight, actUp, actDown, actUpDown = false;
-    GameObject note,gm;
+    GameObject note, gm;
     Color old;
     //public bool createMode;
     //public GameObject n;

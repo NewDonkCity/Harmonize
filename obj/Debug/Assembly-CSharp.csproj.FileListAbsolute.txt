@@ -1,0 +1,2 @@
+C:\Users\Ceemo\Documents\Harmonize\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\Ceemo\Documents\Harmonize\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
