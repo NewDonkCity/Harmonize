@@ -86,6 +86,8 @@ public class Conductor : MonoBehaviour
 
     public float speed;
 
+    public GameObject[] character;
+
     void Awake()
     {
         instance = this;
@@ -118,7 +120,7 @@ public class Conductor : MonoBehaviour
 
         nextTime = startTick + secPerBeat;
 
-        notes = new GameObject[notePrefabs.Length]; //makes sure they match length
+        notes = new GameObject[notePrefabs.Length]; //makes sure they match 
     }
 
     // Update is called once per frame
@@ -157,6 +159,20 @@ public class Conductor : MonoBehaviour
             currentClip = nextClip;
         }
 
+        if (character[0].activeSelf)
+            audioSourceArray[currentClip + 2].volume = 1;
+        else
+            audioSourceArray[currentClip + 2].volume = 0;
+        if (character[1].activeSelf)
+            audioSourceArray[currentClip + 1].volume = 1;
+        else
+            audioSourceArray[currentClip + 1].volume = 0;
+        if (character[2].activeSelf)
+            audioSourceArray[currentClip].volume = 1;
+        else
+            audioSourceArray[currentClip].volume = 0;
+
+        /*
         if (Input.GetKeyDown(keyDown) && layer > 0)
         {
             layer = layer - 1;
@@ -177,6 +193,7 @@ public class Conductor : MonoBehaviour
             audioSourceArray[currentClip].volume = 1;
         else
             audioSourceArray[currentClip].volume = 0;
+        */
 
         /*
         // To calculate the semiquaver note length of a 110 bpm track in 4/4: 
@@ -235,13 +252,16 @@ public class Conductor : MonoBehaviour
             nextTime += secPerBeat;
         }
 
+        /*
         if (i > 3 && i <= notePrefabs.Length)
         {
+            
             //if (currentPosition != notes[i - 4].transform.localPosition)
             currentPosition = notes[i - 4].transform.localPosition;
             notes[i - 4].transform.localPosition = Vector3.MoveTowards(currentPosition, endMarker.localPosition, speed * Time.deltaTime);
             //notes[i - 4].transform.localPosition = Vector3.Lerp(currentPosition, endMarker.localPosition, beatPosition);
         }
+        */
     }
 
     void LateUpdate()
@@ -258,15 +278,14 @@ public class Conductor : MonoBehaviour
     {
         Debug.Log("Tick");
 
-
-
         if (i <= notePrefabs.Length - 4)
         {
-            generationPoint.localPosition = new Vector3(UnityEngine.Random.Range(-10f, 0f), UnityEngine.Random.Range(0f, 10f), 20f);
-            notes[i] = Instantiate(notePrefabs[i], generationPoint.position, transform.rotation) as GameObject;
+            //generationPoint.localPosition = new Vector3(UnityEngine.Random.Range(-10f, 0f), UnityEngine.Random.Range(0f, 10f), 20f);
+            notes[i] = Instantiate(notePrefabs[i], transform.position, transform.rotation) as GameObject;
             notes[i].transform.parent = cam;
-            startPosition = notes[i].transform.localPosition;
-            speed = (endMarker.localPosition - startPosition).magnitude / (secPerBeat*1.7f);
+            //startPosition = notes[i].transform.localPosition;
+            //speed = (endMarker.localPosition - startPosition).magnitude / (secPerBeat*1.7f);
+            //move.CrossFade("Left", 0.1f);
         }
         if (i > 3)
             Destroy(notes[i - 4]);

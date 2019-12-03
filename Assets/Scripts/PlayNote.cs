@@ -128,6 +128,8 @@ public class PlayNote : MonoBehaviour
     {
         //PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + gm.GetComponent<GameManager>().GetScore());
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 100);
+        HealthBar.instance.DealDamage(-1);
+        HitBar.instance.AddPts(1);
     }
     IEnumerator Pressed()
     {

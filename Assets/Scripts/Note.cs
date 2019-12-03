@@ -4,6 +4,26 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
+    public Rigidbody2D myRigidbody;
+    public GameObject noteDestructionPoint;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        myRigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        myRigidbody.velocity = new Vector3(-(4 / Conductor.instance.secPerBeat), 0, 0);
+        if (gameObject.transform.position.x < noteDestructionPoint.transform.position.x)
+        {
+            HealthBar.instance.DealDamage(6);
+            Destroy(gameObject);
+        }
+    }
+    /*
     // Transforms to act as start and end markers for the journey.
     public Transform endMarker;
     public Vector3 currentPosition;
@@ -25,7 +45,6 @@ public class Note : MonoBehaviour
                 notePosition[i] = Conductor.instance.notes[i] / Conductor.instance.beatsPerLoop;
             }
         }
-        */
     }
 
     // Update is called once per frame
@@ -68,6 +87,6 @@ public class Note : MonoBehaviour
         {
             Destroy(notes);
         }
-        */
     }
+    */
 }

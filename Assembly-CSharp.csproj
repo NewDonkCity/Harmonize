@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\BarScript.cs" />
     <Compile Include="Assets\Scripts\BeatSynchronizer.cs" />
     <Compile Include="Assets\Scripts\BF.cs" />
+    <Compile Include="Assets\Scripts\CharacterSelect.cs" />
     <Compile Include="Assets\Scripts\Conductor.cs" />
     <Compile Include="Assets\Scripts\Conductor2.cs" />
     <Compile Include="Assets\Scripts\Conductor3.cs" />
@@ -85,6 +86,9 @@
     <Compile Include="Assets\Scripts\Four.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\HealthBarController.cs" />
+    <Compile Include="Assets\Scripts\HitBar.cs" />
+    <Compile Include="Assets\Scripts\MenuArrow.cs" />
     <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\MusicPlayer.cs" />
     <Compile Include="Assets\Scripts\Note.cs" />
@@ -97,12 +101,13 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\PlayNote.cs" />
     <Compile Include="Assets\Scripts\PPText.cs" />
+    <Compile Include="Assets\Scripts\RealNoteDestroyer.cs" />
     <Compile Include="Assets\Scripts\RockMeter.cs" />
     <Compile Include="Assets\Scripts\Seven.cs" />
     <Compile Include="Assets\Scripts\Six.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Spotlight.cs" />
-    <Compile Include="Assets\Scripts\Stat.cs" />
+    <Compile Include="Assets\Scripts\SwitchCharacter.cs" />
     <Compile Include="Assets\Scripts\SyncedAnimation.cs" />
     <Compile Include="Assets\Scripts\SyncedRotation.cs" />
     <Compile Include="Assets\Scripts\Three.cs" />

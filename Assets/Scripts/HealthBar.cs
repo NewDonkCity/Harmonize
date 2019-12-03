@@ -9,6 +9,14 @@ public class HealthBar : MonoBehaviour
     public float MaxHealth { get; set; }
     public Slider healthbar;
 
+    //HealthBar instance
+    public static HealthBar instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,14 +30,14 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-            DealDamage(6);
+        
     }
 
-    void DealDamage(float damageValue)
+    public void DealDamage(float damageValue)
     {
         //Deduct the damage dealt from the character's health
         CurrentHealth -= damageValue;
+        healthbar.value = CalculateHealth();
         //If the character is out of health, die
         if (CurrentHealth <= 0)
             Die();

@@ -331,9 +331,9 @@ MonoBehaviour:
   noteDestructionPoint: {fileID: 8180659486479607188, guid: fa07b78051704484dabf44d52ae5f6f6,
     type: 3}
   myRigidbody: {fileID: 0}
-  x: 0
-  y: 0
-  z: {x: 0, y: 0, z: 0}
+  x: 8.47735818689e-312
+  y: 8.477358186496e-312
+  z: {x: NaN, y: 5.59e-43, z: NaN}
 --- !u!1 &1184089660635705020
 GameObject:
   m_ObjectHideFlags: 0

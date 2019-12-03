@@ -10,8 +10,8 @@ public class FloatingTextController : MonoBehaviour
     public static void Initialize()
     {
         canvas = GameObject.Find("Canvas");
-        //if (!popupText)
-            //popupText = Resources.Load<FloatingText>("Prefabs/PopupTextParent");
+        if (!popupText)
+            popupText = Resources.Load<FloatingText>("Prefabs/PopupTextParent");
     }
 
     public static void CreateFloatingText(string text, Transform location)

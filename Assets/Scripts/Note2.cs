@@ -9,12 +9,12 @@ public class Note2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //myRigidbody = GetComponent<Rigidbody>();
+        myRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //myRigidbody.velocity = new Vector3(0, 0, (200 / Conductor.instance.secPerBeat));
+        myRigidbody.velocity = new Vector3(0, 0, (200 / Conductor.instance.secPerBeat));
     }
 }

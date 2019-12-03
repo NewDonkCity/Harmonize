@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    /*
     [SerializeField] private Stat health;
     [SerializeField] private Stat energy;
     [SerializeField] private Stat hype;
@@ -49,4 +50,5 @@ public class Player : MonoBehaviour
             hype.CurrentVal += 10;
         }
     }
+    */
 }

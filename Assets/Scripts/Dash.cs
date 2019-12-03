@@ -21,27 +21,31 @@ public class Dash : MonoBehaviour
     {
         if (Input.GetKeyDown("a"))
         {
-            move.Play("Left");
+            //move.Play("Left");
             //targetPos = new Vector2(transform.position.x - increment, transform.position.y + increment);
             //transform.position = targetPos;
+            move.CrossFade("Left",0.1f);
         }
         if (Input.GetKeyDown("d"))
         {
-            move.Play("Right");
+            //move.Play("Right");
             //targetPos = new Vector2(transform.position.x + increment, transform.position.y);
             //transform.position = targetPos;
+            move.CrossFade("Right", 0.1f);
         }
         if (Input.GetKeyDown("w"))
         {
-            move.Play("Up");
+            //move.Play("Up");
             //targetPos = new Vector2(transform.position.x, transform.position.y + increment);
             //transform.position = targetPos;
+            move.CrossFade("Up", 0.1f);
         }
         if (Input.GetKeyDown("s"))
         {
-            move.Play("Down");
+            //move.Play("Down");
             //targetPos = new Vector2(transform.position.x, transform.position.y - increment);
             //transform.position = targetPos;
+            move.CrossFade("Down", 0.1f);
         }
     }
 }
