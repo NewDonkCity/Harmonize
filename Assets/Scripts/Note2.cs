@@ -15,6 +15,6 @@ public class Note2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myRigidbody.velocity = new Vector3(0, 0, (200 / Conductor.instance.secPerBeat));
+        myRigidbody.velocity = new Vector3(0, 0, (40 / Conductor.instance.secPerBeat));
     }
 }

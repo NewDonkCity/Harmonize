@@ -51,6 +51,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -62,6 +63,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -167,10 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b9645ebfd5297469a0af477f315fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generationPoint: {fileID: 0}
-  noteDestructionPoint: {fileID: 7464637552988026659, guid: c287cd48cccea034f996fa22f3918a6e,
+  generationPoint: {fileID: 6884604002940206927, guid: 84a0d3ecce1e6df48b1fd67e45141a9e,
     type: 3}
-  myRigidbody: {fileID: 0}
+  noteDestructionPoint: {fileID: 5247577925145029097, guid: c287cd48cccea034f996fa22f3918a6e,
+    type: 3}
   x: 0
   y: 0
   z: {x: 0, y: 0, z: 0}
@@ -186,6 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7dfe70f89eb5b4bbe5c5ed2a1846e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRigidbody: {fileID: 0}
-  noteDestructionPoint: {fileID: 7812080500130146230, guid: c287cd48cccea034f996fa22f3918a6e,
+  myRigidbody: {fileID: 7860679654107983977}
+  noteDestructionPoint: {fileID: 5247577925145029097, guid: c287cd48cccea034f996fa22f3918a6e,
     type: 3}

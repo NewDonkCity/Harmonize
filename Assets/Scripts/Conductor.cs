@@ -10,7 +10,7 @@ public class Conductor : MonoBehaviour
     public float songBpm;
 
     //The number of seconds for each song beat
-    [HideInInspector] public float secPerBeat;
+    public float secPerBeat;
 
     //Current song position, in seconds
     public float songPosition;
@@ -47,7 +47,7 @@ public class Conductor : MonoBehaviour
     //Use two Audio Sources in an Array
     public AudioSource[] audioSourceArray;
 
-    [HideInInspector] int nextClip;
+    public int nextClip = 0;
     [HideInInspector] int currentClip;
 
     public double nextStartTime = 0;
@@ -79,6 +79,7 @@ public class Conductor : MonoBehaviour
 
     double sampleRate = 0.0F;
     bool ticked = false;
+    public bool moving, swapped, choose;
 
     public Transform cam;
 
@@ -88,9 +89,18 @@ public class Conductor : MonoBehaviour
 
     public GameObject[] character;
 
+    public GameObject currentPos1, currentPos2;
+
+    public Vector2 pos1, pos2, pos3;
+
+    public GameObject menuUI;
+
+    public int playerID;
+
     void Awake()
     {
         instance = this;
+        //character[2].gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -113,7 +123,7 @@ public class Conductor : MonoBehaviour
         compLoops = new int[notePrefabs.Length];
         loopAnalog = new float[notePrefabs.Length];
 
-        nextTime = AudioSettings.dspTime + secPerBeat;
+        //nextTime = AudioSettings.dspTime + secPerBeat;
 
         double startTick = AudioSettings.dspTime;
         sampleRate = AudioSettings.outputSampleRate;
@@ -121,20 +131,119 @@ public class Conductor : MonoBehaviour
         nextTime = startTick + secPerBeat;
 
         notes = new GameObject[notePrefabs.Length]; //makes sure they match 
+        pos1 = currentPos1.transform.localPosition;
+        pos2 = currentPos2.transform.localPosition;
+        //currentPos3 = character[2].transform.localPosition;
+
+        character[1].gameObject.SetActive(false);
+        character[3].gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            swapped = !swapped;
+            moving = !moving;
+            if (swapped)
+                playerID = playerID + 2;
+            else
+                playerID = playerID - 2;
+        }
+        //if (Input.GetKeyDown(KeyCode.C))
+            //menuUI.SetActive(false);
         if (Input.GetKey(key1))
             nextClip = 0;
         if (Input.GetKey(key2))
             nextClip = 3;
         if (Input.GetKey(key3))
             nextClip = 6;
+        
+        //if (Vector3.Distance(currentPos1.transform.localPosition, pos2) != 0 && moving == true)
+        if (swapped == true && moving == true)
+        {
+            //currentPos1.transform.localPosition = pos2;
+            //currentPos2.transform.localPosition = pos1;
+            currentPos1.transform.localPosition = Vector2.MoveTowards(currentPos1.transform.localPosition, pos2, 0.5f);
+            currentPos2.transform.localPosition = Vector2.MoveTowards(currentPos2.transform.localPosition, pos1, 0.5f);
+            if (Vector3.Distance(currentPos1.transform.localPosition, pos2) == 0)
+            {
+                //playerID = playerID - 2;
+                moving = false;
+            }
+        }
+        if (swapped == false && moving == true)
+        {
+            //currentPos1.transform.localPosition = pos2;
+            //currentPos2.transform.localPosition = pos1;
+            currentPos1.transform.localPosition = Vector2.MoveTowards(currentPos1.transform.localPosition, pos1, 0.5f);
+            currentPos2.transform.localPosition = Vector2.MoveTowards(currentPos2.transform.localPosition, pos2, 0.5f);
+            if (Vector3.Distance(currentPos1.transform.localPosition, pos1) == 0)
+            {
+                //playerID = playerID + 2;
+                moving = false;
+            }
+        }
+        /**
+        if (swapped == false && moving == true)
+        {
+            //currentPos1.transform.localPosition = pos2;
+            //currentPos2.transform.localPosition = pos1;
+            //swapped = true;
+            playerID = playerID + 2;
+            currentPos1.transform.localPosition = Vector2.MoveTowards(currentPos1.transform.localPosition, pos2, 0.5f);
+            currentPos2.transform.localPosition = Vector2.MoveTowards(currentPos2.transform.localPosition, pos1, 0.5f);
+            //if (Vector3.Distance(currentPos1.transform.localPosition, pos2) == 0)
+                //moving = false;
+        }
+        if (swapped == true && moving == true)
+        {
+            //currentPos1.transform.localPosition = pos2;
+            //currentPos2.transform.localPosition = pos1;
+            //swapped = false;
+            playerID = playerID - 2;
+            currentPos1.transform.localPosition = Vector2.MoveTowards(currentPos1.transform.localPosition, pos1, 0.5f);
+            currentPos2.transform.localPosition = Vector2.MoveTowards(currentPos2.transform.localPosition, pos2, 0.5f);
+            //if (Vector3.Distance(currentPos1.transform.localPosition, pos1) == 0)
+                //moving = false;
+        }
+        **/
         if (AudioSettings.dspTime + 0.2 > nextStartTime)
         {
+            //currentPos1.transform.localPosition = pos2;
+            //currentPos2.transform.localPosition = pos1;
+            //if (nextClip >= 3 && nextClip <= 5)
+            //if (nextClip <= 2)
+            //swapped = !swapped;
+            if (nextClip <= 2)
+            {
+                //playerID = 1;
+                choose = true;
+                //moving = true;
+                menuUI.SetActive(true);
+                /**
+                // Keep a note of the time the movement started.
+                startTime = Time.time;
 
+                // Calculate the journey length.
+                journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+
+                // Distance moved equals elapsed time times speed..
+                float distCovered = (Time.time - startTime) * speed;
+
+                // Fraction of journey completed equals current distance divided by total distance.
+                float fractionOfJourney = distCovered / journeyLength;
+
+                // Set our position as a fraction of the distance between the markers.
+                transform.position = Vector3.Lerp(startMarker.position, endMarker.position, fractionOfJourney);
+                **/
+            }
+            else
+            {
+                choose = false;
+                menuUI.SetActive(false);
+            }
             if (nextClip == currentClip)
             {
                 audioSourceArray[currentClip].loop = true;
@@ -168,7 +277,10 @@ public class Conductor : MonoBehaviour
         else
             audioSourceArray[currentClip + 1].volume = 0;
         if (character[2].activeSelf)
+        {
             audioSourceArray[currentClip].volume = 1;
+            //playerID = 2;
+        }
         else
             audioSourceArray[currentClip].volume = 0;
 
@@ -264,6 +376,7 @@ public class Conductor : MonoBehaviour
         */
     }
 
+    /**
     void LateUpdate()
     {
         if (!ticked && nextTime >= AudioSettings.dspTime)
@@ -272,7 +385,6 @@ public class Conductor : MonoBehaviour
             BroadcastMessage("OnTick");
         }
     }
-
     // Just an example OnTick here
     void OnTick()
     {
@@ -281,14 +393,14 @@ public class Conductor : MonoBehaviour
         if (i <= notePrefabs.Length - 4)
         {
             //generationPoint.localPosition = new Vector3(UnityEngine.Random.Range(-10f, 0f), UnityEngine.Random.Range(0f, 10f), 20f);
-            notes[i] = Instantiate(notePrefabs[i], transform.position, transform.rotation) as GameObject;
-            notes[i].transform.parent = cam;
+            //notes[i] = Instantiate(notePrefabs[i], transform.position, transform.rotation) as GameObject;
+            //notes[i].transform.parent = cam;
             //startPosition = notes[i].transform.localPosition;
             //speed = (endMarker.localPosition - startPosition).magnitude / (secPerBeat*1.7f);
             //move.CrossFade("Left", 0.1f);
         }
-        if (i > 3)
-            Destroy(notes[i - 4]);
+        //if (i > 3)
+            //Destroy(notes[i - 4]);
 
         nextTime += secPerBeat;
         i++;

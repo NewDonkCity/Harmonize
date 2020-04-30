@@ -4,48 +4,137 @@ using UnityEngine;
 
 public class Dash : MonoBehaviour
 {
-    public Animator move;
+    //public GameObject player;
+    //public Animator move;
     //private Vector2 targetPos;
     //public float increment;
 
     //public float speed;
+    //public float chargeSpeed = 20;
+    public float power;
+    public bool buttonHeldDown;
+    public Vector2 currentPos;
+    public float startTime;
+    public float secPerBeat;
+    public int playerID;
+
+    public GameObject home;
+
+    //HealthBar instance
+    public static Dash instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        move = GetComponent<Animator>();
+        secPerBeat = 60f / Conductor.instance.songBpm;
+        //move = GetComponent<Animator>();
+        currentPos = home.transform.localPosition;
+    }
+
+    void Update()
+    {
+        if (playerID == Conductor.instance.playerID)
+            Dashing();
+        //if (Conductor.instance.playerID <= 1)
+        /**
+        if (Conductor.instance.swapped)
+        {
+            //playerID = Conductor.instance.playerID;
+            if (playerID == MenuArrow.instance.index)
+                Dashing();
+        }
+        //if (Conductor.instance.playerID >= 2)
+        else
+        {
+            //playerID = Conductor.instance.playerID - 2;
+            if (playerID == MenuArrow.instance.index + 2)
+                Dashing();
+        }
+        **/
     }
 
     // Update is called once per frame
-    void Update()
+    void Dashing()
     {
-        if (Input.GetKeyDown("a"))
+        StartCoroutine(Waiting());
+        if (power <= secPerBeat || buttonHeldDown == false)
+            power = 0f;
+        if (Input.GetKeyDown("a") || Input.GetKeyDown("d") || Input.GetKeyDown("w") || Input.GetKeyDown("s"))
         {
-            //move.Play("Left");
-            //targetPos = new Vector2(transform.position.x - increment, transform.position.y + increment);
-            //transform.position = targetPos;
-            move.CrossFade("Left",0.1f);
+            startTime = Time.time;
         }
-        if (Input.GetKeyDown("d"))
+        if (Input.GetKey("a") && power <= secPerBeat)
         {
-            //move.Play("Right");
-            //targetPos = new Vector2(transform.position.x + increment, transform.position.y);
-            //transform.position = targetPos;
-            move.CrossFade("Right", 0.1f);
+            if (power > secPerBeat)
+                power = 0f;
+            else
+                power = (Time.time - startTime);
         }
-        if (Input.GetKeyDown("w"))
+        else if (Input.GetKey("d") && power <= (secPerBeat + 0.2f))
         {
-            //move.Play("Up");
-            //targetPos = new Vector2(transform.position.x, transform.position.y + increment);
-            //transform.position = targetPos;
-            move.CrossFade("Up", 0.1f);
+            if (power > secPerBeat)
+                power = 0f;
+            else
+                power = (Time.time - startTime);
         }
-        if (Input.GetKeyDown("s"))
+        else if (Input.GetKey("w") && power <= (secPerBeat + 0.2f))
         {
-            //move.Play("Down");
-            //targetPos = new Vector2(transform.position.x, transform.position.y - increment);
-            //transform.position = targetPos;
-            move.CrossFade("Down", 0.1f);
+            if (power > secPerBeat)
+                power = 0f;
+            else
+                power = (Time.time - startTime);
+        }
+        else if (Input.GetKey("s") && power <= (secPerBeat + 0.2f))
+        {
+            if (power > secPerBeat)
+                power = 0f;
+            else
+                power = (Time.time - startTime);
+        }
+    }
+
+    IEnumerator Waiting()
+    {
+        if (Input.GetKey("a") && buttonHeldDown == false)
+        {
+            buttonHeldDown = true;
+            transform.Translate(new Vector2(-2,0));
+            while (Input.GetKey("a"))
+                yield return new WaitForSeconds(0);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, currentPos, 2.1f);
+            buttonHeldDown = false;
+        }
+        else if (Input.GetKey("d") && buttonHeldDown == false)
+        {
+            buttonHeldDown = true;
+            transform.Translate(new Vector2(2,0));
+            while (Input.GetKey("d"))
+                yield return new WaitForSeconds(0);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, currentPos, 2.1f);
+            buttonHeldDown = false;
+        }
+        else if (Input.GetKey("w") && buttonHeldDown == false)
+        {
+            buttonHeldDown = true;
+            transform.Translate(new Vector2(0,2));
+            while (Input.GetKey("w"))
+                yield return new WaitForSeconds(0);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, currentPos, 2.1f);
+            buttonHeldDown = false;
+        }
+        else if (Input.GetKey("s") && buttonHeldDown == false)
+        {
+            buttonHeldDown = true;
+            transform.Translate(new Vector2(0,-2));
+            while (Input.GetKey("s"))
+                yield return new WaitForSeconds(0);
+            transform.localPosition = Vector2.MoveTowards(transform.localPosition, currentPos, 2.1f);
+            buttonHeldDown = false;
         }
     }
 }
