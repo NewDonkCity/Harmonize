@@ -26,11 +26,11 @@ public class PauseMenu : MonoBehaviour
     void QuitMenu()
     {
         menuUI.SetActive(false);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
     void Menu()
     {
         menuUI.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 }
