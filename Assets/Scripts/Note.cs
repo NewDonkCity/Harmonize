@@ -5,7 +5,7 @@ using UnityEngine;
 public class Note : MonoBehaviour
 {
     public Rigidbody2D myRigidbody;
-    public GameObject noteDestructionPoint;
+    //public GameObject noteDestructionPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +16,14 @@ public class Note : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myRigidbody.velocity = new Vector3(-(4 / Conductor.instance.secPerBeat), 0, 0);
+        myRigidbody.velocity = new Vector3(-(4f / Conductor.instance.secPerBeat), 0, 0);
+        /**
         if (gameObject.transform.position.x < noteDestructionPoint.transform.position.x)
         {
             HealthBar.instance.DealDamage(6);
             Destroy(gameObject);
         }
+        **/
     }
     /*
     // Transforms to act as start and end markers for the journey.

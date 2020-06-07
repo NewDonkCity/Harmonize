@@ -10,6 +10,14 @@ TagManager:
   - NoteUp
   - NoteDown
   - NoteUpDown
+  - HitUp
+  - HitLeft
+  - HitRight
+  - HitDown
+  - ComboDown
+  - ComboLeft
+  - ComboRight
+  - ComboUp
   layers:
   - Default
   - TransparentFX

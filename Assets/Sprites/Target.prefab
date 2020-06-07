@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7422527145060177183}
   - component: {fileID: 7422527145060177182}
   - component: {fileID: 7422527145060177168}
+  - component: {fileID: 7245183466428472067}
   - component: {fileID: 7422527145060177169}
   m_Layer: 0
   m_Name: Target
@@ -47,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -58,6 +60,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -93,7 +96,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9576a90690c52f14392256b62733c853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 0
+  keyLeft: 0
+  keyRight: 0
+  keyUp: 0
+  keyDown: 0
+  note: {fileID: 0}
+  note2: {fileID: 0}
+  noteLeft: {fileID: 0}
+  noteRight: {fileID: 0}
+  noteUp: {fileID: 0}
+  noteDown: {fileID: 0}
+  gm: {fileID: 0}
+  createMode: 0
+--- !u!114 &7245183466428472067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7422527145060177181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2babbe36b88274a8bf977a03799938, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pivot: {fileID: 0}
+  hitBox: {fileID: 0}
+  Background: {fileID: 0}
+  ImageColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!58 &7422527145060177169
 CircleCollider2D:
   m_ObjectHideFlags: 0
